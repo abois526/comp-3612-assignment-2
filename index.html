@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closet Collection: Clothing, Shoes and Accessories for Men and Women</title>
+  <link rel="icon" href="./images/favicon.ico" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel='stylesheet'>
+  <link href="./output.css" rel="stylesheet">
+  <script type="module" src="./js/main.js"></script>
+</head>
+
+<body>
+
+  <!----------------------------------------------------------------------------
+  / SECTION: Page Header
+  /---------------------------------------------------------------------------->
+  <header class="sticky top-0 z-50 bg-timberwolf-light80 text-raisin-black font-cinzel text-xl">
+    <nav id="top-nav"
+      class="grid grid-cols-[minmax(12rem,auto)_minmax(16rem,auto)_minmax(12rem,auto)] items-center min-h-16">
+      <!-- Logo -->
+      <div class="flex justify-center">
+        <img class="header-company-logo w-auto h-14 cursor-pointer" src="./images/Closet_Collection_Logo.png"
+          alt="Closet Collection Logo">
+      </div>
+      <!-- List of Links -->
+      <ul class="flex flex-wrap justify-center items-center gap-5
+      [&_a:hover]:text-cerulian [&_p]:text-raisin-black">
+        <li><a href="#" data-route="home">Home</a></li>
+        <li>
+          <p>|</p>
+        </li>
+        <li><a href="#" data-route="womens">Women</a></li>
+        <li>
+          <p>|</p>
+        </li>
+        <li><a href="#" data-route="mens">Men</a></li>
+        <li>
+          <p>|</p>
+        </li>
+        <li><a href="#" data-route="browse">Browse</a></li>
+        <li>
+          <p>|</p>
+        </li>
+        <li><a href="#" data-route="about">About</a></li>
+      </ul>
+      <!-- Cart Button -->
+      <div class="flex justify-center items-center font-nunito h-full">
+        <!-- <div class="text-3xl"><i class="fa fa-shopping-bag" aria-hidden="true">&nbsp;</i></div> -->
+        <img data-route="cart" id="cart-logo" class="cart-logo w-auto h-10 cursor-pointer" src="./images/Cart_Logo.png"
+          alt="Shopping Cart Logo">
+        <div id="cart-badge"
+          class="invisible flex justify-center items-center h-6 w-6 rounded-full bg-red-500 text-timberwolf-light80 text-sm relative bottom-4 right-1 border-[0.5px] border-black">
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!----------------------------------------------------------------------------
+  / SECTION: Main Section (Containers for SPA)
+  /---------------------------------------------------------------------------->
+  <main class="bg-timberwolf-light80 text-raisin-black font-nunito">
+
+    <!-- Snackbar -->
+    <div id="snackbar"
+      class="hidden border border-black min-w-sm -ml-30 bg-timberwolf text-center rounded-xl p-4 fixed z-50 left-1/2 top-20 opacity-100">
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="hidden">
+      <div class="flex justify-center items-center">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!----------------------------------------------------------------------------
+    / SECTION: Home View
+    /---------------------------------------------------------------------------->
+    <article id="home-view" class="spa-page hidden">
+      <section class="mx-auto max-w-8xl">
+        <div class="border gap-3 relative">
+          <video src="./video/1154850-hd_1920_1080_24fps.mp4" class="w-full h-160 object-cover object-top" autoplay
+            muted loop></video>
+          <div class="flex flex-col justify-center pl-40 absolute inset-0 text-white text-xl bg-black/50">
+            <span class="text-6xl font-bold">Closet Collection</span>
+            <span class="text-xl font-light pl-3">Modern looks and timeless styles</span>
+          </div>
+        </div>
+      </section>
+      <!-- Featured Products Card Row -->
+      <section class="mx-auto max-w-8xl mt-6">
+        <h4 class="text-center text-2xl font-bold pb-4">Featured Products</h4>
+        <ul id="featured-products-cards" class="grid grid-flow-col auto-cols-max gap-6 overflow-x-auto">
+        </ul>
+      </section>
+    </article>
+
+    <!----------------------------------------------------------------------------
+    / SECTION: Men's Landing View
+    /---------------------------------------------------------------------------->
+    <article id="mens-view" class="spa-page hidden">
+      <!-- Hero Image -->
+      <section class="mx-auto max-w-8xl">
+        <div class="border gap-3 relative">
+          <img src="https://picsum.photos/id/1050/2000/3000" alt="" class="w-full h-100 object-cover">
+          <div class="flex flex-col justify-center pl-40 absolute inset-0 text-white text-xl bg-black/50">
+            <span class="text-6xl font-bold">The Men's Collection</span>
+            <span class="text-xl font-light pl-3">Explore our latest additions</span>
+          </div>
+        </div>
+      </section>
+      <!-- Featured Products Card Rows -->
+      <section class="mx-auto max-w-8xl mt-6">
+        <ul id="mens-category-cards" class="flex overflow-x-auto">
+        </ul>
+      </section>
+    </article>
+
+
+
+    <!----------------------------------------------------------------------------
+    / SECTION: Women's Landing View
+    /---------------------------------------------------------------------------->
+    <article id="womens-view" class="spa-page hidden">
+      <!-- Hero Image -->
+      <section class="mx-auto max-w-8xl">
+        <div class="border gap-3 relative">
+          <img src="https://picsum.photos/id/1050/2000/3000" alt="" class="w-full h-100 object-cover">
+          <div class="flex flex-col justify-center pl-40 absolute inset-0 text-white text-xl bg-black/50">
+            <span class="text-6xl font-bold">The Women's Collection</span>
+            <span class="text-xl font-light pl-3">Explore our latest additions</span>
+          </div>
+        </div>
+      </section>
+      <!-- Category Card Rows -->
+      <section class="mx-auto max-w-8xl mt-6">
+        <ul id="womens-category-cards" class="flex overflow-x-auto">
+        </ul>
+      </section>
+    </article>
+
+    <!----------------------------------------------------------------------------
+    / SECTION: Browse View
+    /---------------------------------------------------------------------------->
+    <article id="browse-view" class="spa-page hidden">
+      <article class="grid grid-cols-[24rem_auto]">
+        <!-- Filter Section -->
+        <section class="w-full p-4">
+          <!-- weird math is to make scrollbar work, sets max height to viewport height minus the 5rem the top-20 val takes up -->
+          <form id="filters" class="sticky top-20 max-h-[calc(100vh-5rem)] overflow-y-auto pr-3">
+            <!-- Gender filter -->
+            <details class="border-b py-2">
+              <summary class="flex items-center justify-between cursor-pointer">
+                <span class="font-semibold text-xl">Gender</span>
+                <span>&#9662;</span>
+              </summary>
+              <fieldset class="mt-3 space-y-2 [&_label]:cursor-pointer">
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="gender" value="mens"
+                    class="accent-cerulian">Men's</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="gender" value="womens"
+                    class="accent-cerulian">Women's</label>
+              </fieldset>
+            </details>
+            <!-- Category filter -->
+            <details class="border-b py-2">
+              <summary class="flex items-center justify-between cursor-pointer">
+                <span class="font-semibold text-xl">Category</span>
+                <span>&#9662;</span>
+              </summary>
+              <fieldset class="mt-3 space-y-2 [&_label]:cursor-pointer">
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category"
+                    value="Accessories" class="accent-cerulian">Accessories</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Bottoms"
+                    class="accent-cerulian">Bottoms</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Dresses"
+                    class="accent-cerulian">Dresses</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Intimates"
+                    class="accent-cerulian">Intimates</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Jumpsuits"
+                    class="accent-cerulian">Jumpsuits</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Loungewear"
+                    class="accent-cerulian">Loungewear</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Outerwear"
+                    class="accent-cerulian">Outerwear</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Shoes"
+                    class="accent-cerulian">Shoes</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Sweaters"
+                    class="accent-cerulian">Sweaters</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Swimwear"
+                    class="accent-cerulian">Swimwear</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="category" value="Tops"
+                    class="accent-cerulian">Tops</label>
+              </fieldset>
+            </details>
+            <!-- Size filter -->
+            <details class="border-b py-2">
+              <summary class="flex items-center justify-between cursor-pointer">
+                <span class="font-semibold text-xl">Size</span>
+                <span>&#9662;</span>
+              </summary>
+              <fieldset class="mt-3 space-y-2 [&_label]:cursor-pointer">
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="XS"
+                    class="accent-cerulian">X-Small</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="S"
+                    class="accent-cerulian">Small</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="M"
+                    class="accent-cerulian">Medium</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="L"
+                    class="accent-cerulian">Large</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="XL"
+                    class="accent-cerulian">X-Large</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="S/M"
+                    class="accent-cerulian">S/M</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="L/XL"
+                    class="accent-cerulian">L/XL</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="6"
+                    class="accent-cerulian">6</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="7"
+                    class="accent-cerulian">7</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="8"
+                    class="accent-cerulian">8</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="9"
+                    class="accent-cerulian">9</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="10"
+                    class="accent-cerulian">10</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="24"
+                    class="accent-cerulian">24</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="26"
+                    class="accent-cerulian">26</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="28"
+                    class="accent-cerulian">28</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="30"
+                    class="accent-cerulian">30</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="32"
+                    class="accent-cerulian">32</label>
+                <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="size" value="One Size"
+                    class="accent-cerulian">One Size</label>
+              </fieldset>
+            </details>
+            <!-- Colors filter -->
+            <details class="border-b py-2">
+              <summary class="flex items-center justify-between cursor-pointer">
+                <span class="font-semibold text-xl">Colors</span>
+                <span>&#9662;</span>
+              </summary>
+              <fieldset id="color-filter-labels" class="mt-3 space-y-2 [&_label]:cursor-pointer">
+                <!-- fill using JS -->
+              </fieldset>
+            </details>
+          </form>
+        </section>
+
+        <!-- Results Section -->
+        <section class="mx-auto max-w-6xl space-y-4">
+          <div class="grid grid-cols-2 my-4">
+            <div id="browse-num-matches" class="justify-self-start text-xl font-semibold">
+              <!-- # of items that match -->
+            </div>
+            <select id="sorting-options" class="justify-self-end">
+              <option value="product">Product Name (A-Z)</option>
+              <option value="price">Price (Low to High)</option>
+              <option value="category">Category (Ascending)</option>
+            </select>
+          </div>
+          <div id="remove-filter-btns" class="">
+            <!-- Browse Filters and Reset Appear Here -->
+          </div>
+          <ul id="browse-product-list" class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center">
+            <!-- fill with product cards -->
+          </ul>
+        </section>
+      </article>
+    </article>
+
+
+    <!----------------------------------------------------------------------------
+    / SECTION: Single Product View
+    /---------------------------------------------------------------------------->
+    <!-- reminder, change from template -->
+    <article id="product-view" class="spa-page text-raisin-black hidden">
+      <!-- Breadcrumb -->
+      <ul id="breadcrumb" class="flex flex-wrap items-center min-h-10 pl-10 text-sm 
+      [&_li]:px-1.5
+      [&_p]:text-umber
+      [&_a]:underline">
+        <li><a href="#">Closet Collection</a></li>
+        <li>
+          <p>/</p>
+        </li>
+        <li><a id="gender-crumb" href="#">
+            <!-- fill with JS -->
+          </a></li>
+        <li>
+          <p>/</p>
+        </li>
+        <li><a id="category-crumb" href="#">
+            <!-- fill with JS -->
+          </a></li>
+        <li>
+          <p>/</p>
+        </li>
+        <li>
+          <p id="title-crumb">
+            <!-- fill with JS -->
+          </p>
+        </li>
+      </ul>
+      <!-- Product Images and Details -->
+      <!-- weird values are trying to find approx golden ratio, not random weird stuff or AI slop -->
+      <div id="product-page" class="grid grid-cols-[62%_auto]">
+        <!-- Left Side -->
+        <div class="grid grid-rows-[494px_306px]">
+          <!-- Top Row -->
+          <div class="flex justify-center items-center">
+            <img id="spv-image" class="w-11/12 h-11/12 object-cover" src="">
+          </div>
+          <!-- Bottom Row -->
+          <div class="grid grid-cols-2">
+            <div class="flex justify-center items-center">
+              <img id="spv-image" class="aspect-3/2 w-10/12 object-cover" src="">
+            </div>
+            <div class="flex justify-center items-center">
+              <img id="spv-image" class="aspect-3/2 w-10/12 object-cover" src="">
+            </div>
+          </div>
+        </div>
+        <!-- Right Side -->
+        <div class="p-12">
+          <!-- make content scroll -->
+          <!-- Reminder: adjust z-index if you add other stuff that stacks  -->
+          <div
+            class="sticky top-24 flex flex-col
+            [&_label:has(input[type=radio]:checked)]:border-2 [&_label:has(input[type=radio]:checked)]:border-cerulian [&_label:has(input[type=radio]:checked)]:border-solid [&_input[type=radio]]:hidden">
+            <!-- Product Title -->
+            <div>
+              <h4 id="spv-product-title" class="text-3xl pb-4">
+                <!-- filled with JS -->
+              </h4>
+            </div>
+            <!-- Product Price -->
+            <div>
+              <h3 id="spv-product-price" class="text-2xl pb-4">
+                <!-- filled with JS -->
+              </h3>
+            </div>
+            <!-- Product Description -->
+            <div>
+              <p id="spv-product-description" class="text-xl pb-4">
+                <!-- filled with JS -->
+              </p>
+            </div>
+            <!-- Material -->
+            <div>
+              <p id="spv-product-material" class="text-xl pb-4">
+                <!-- filled with JS -->
+              </p>
+            </div>
+            <!-- Form -->
+            <form>
+              <div>
+                <!-- Sizes -->
+                <fieldset>
+                  <label class="font-bold">Size:</label>
+                  <span id="spv-product-sizes"
+                    class="flex justify-start pb-4 gap-2 flex-wrap
+                [&_label]:cursor-pointer [&_label]:border [&_label]:border-umber [&_label]:border-solid [&_label]:p-[0.5rem_1rem] [&_label]:rounded-sm">
+                    <!-- filled with JS -->
+                  </span>
+                </fieldset>
+                <label class="font-bold">Color:</label>
+                <div id="spv-product-color" class="w-6 h-6 mb-4 rounded-4xl border border-black"></div>
+                <fieldset>
+                  <span class="inline">
+                    <label class="font-bold block">Quantity:</label>
+                    <input class="w-12 h-10 mb-4 text-center border border-raisin-black rounded-sm" type="text"
+                      name="quantity">
+                  </span>
+                </fieldset>
+                <button id="spv-add-to-cart" data-product-id=""
+                  class="px-3 py-1 rounded border text-xl cursor-pointer"><i class="fa fa-cart-plus"
+                    aria-hidden="true"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Related Products Card Row -->
+      <section class="mx-auto max-w-6xl p-6">
+        <h4 class="text-center text-2xl font-bold pb-4">Related Products</h4>
+        <ul id="related-products-card-row" class="grid gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </section>
+    </article>
+
+    <!----------------------------------------------------------------------------
+    / SECTION: Shopping Cart View
+    /---------------------------------------------------------------------------->
+    <article id="cart-view" class="spa-page hidden">
+      <!-- Shopping Cart Info -->
+      <div class="mx-auto max-w-5xl">
+        <!-- remove item, image, title, color, size, individual price, quantity, subtotal -->
+        <h1 id="cart-header" class="py-4 text-2xl font-bold"></h1>
+        <!-- "Your Cart (x)" or "Looks like your cart is currently empty" -->
+        <ul id="cart-items-list" class="space-y-4">
+          <!-- populated with JS -->
+        </ul>
+      </div>
+      <!-- Shipping Info and Order Summary -->
+      <div class="mx-auto max-w-5xl grid grid-cols-2 mt-4">
+        <!-- Shipping Info -->
+        <div id="cart-shipping-info" class="flex flex-col space-y-4">
+          <!-- shipping method (standard etc), destination -->
+          <h1 class="text-2xl font-bold">Shipping</h1>
+          <select id="shipping-method" class="w-40">
+            <option>Standard</option>
+            <option>Express</option>
+            <option>Priority</option>
+          </select>
+          <select id="shipping-destination" class="w-40">
+            <option>Canada</option>
+            <option>United States</option>
+            <option>International</option>
+          </select>
+        </div>
+        <!-- Order Summary -->
+        <div id="cart-order-summary" class="flex flex-col space-y-4 mb-4">
+          <h1 class="text-2xl font-bold">Summary</h1>
+          <span class="flex justify-between">
+            <p>Merchandise</p>
+            <p id="merch-value"></p>
+          </span>
+          <span class="flex justify-between">
+            <p>Shipping</p>
+            <p id="shipping-value"></p>
+          </span>
+          <span class="flex justify-between">
+            <p>Tax</p>
+            <p id="tax-value"></p>
+          </span>
+          <span class="flex justify-between font-bold">
+            <p>Total</p>
+            <p id="total-value"></p>
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <template id="cart-list-item-tmp">
+      <li id="cart-list-li" data-product-id="" data-product-size="" class="grid grid-cols-[15rem_auto]">
+        <img id="cart-item-img" src="" alt="" class="w-50 h-50 object-cover rounded">
+        <div class="flex flex-col justify-start space-y-4">
+          <div class="flex justify-between">
+            <h2 id="cart-item-name" class="font-semibold text-2xl">
+              <!-- fill with JS -->
+            </h2>
+            <h2 id="cart-item-subtotal" class="font-semibold text-2xl">
+              <!-- fill with JS -->
+            </h2>
+          </div>
+          <div id="cart-item-info">
+            <!-- fill with JS -->
+          </div>
+          <div id="cart-item-price" class="font-semibold text-lg">
+            <!-- fill with JS -->
+          </div>
+          <div class="flex justify-between">
+            <div id="cart-item-quantity">
+              <!-- fill with JS -->
+            </div>
+            <button id="cart-remove-btn" class="px-3 py-1 rounded border text-xl cursor-pointer"><i
+                class="fa fa-trash-o" aria-hidden="true"></i></button>
+          </div>
+      </li>
+    </template>
+
+    <!----------------------------------------------------------------------------
+    / SECTION: About Us View
+    /---------------------------------------------------------------------------->
+    <dialog id="about-view"
+      class="spa-page hidden mx-auto my-auto w-4xl h-160 relative bg-timberwolf-light80 overflow-auto border border-gray-600">
+      <button id="close-btn" autofocus
+        class="w-8 h-8 rounded-4xl border border-gray-600 cursor-pointer text-xl flex items-end justify-center mt-1 ml-1 bg-gray-300 text-gray-600">&#10005;</button>
+      <div class="flex flex-col mx-10 space-y-4 mb-8">
+        <h1 class="font-semibold text-xl">
+          Site Author:
+        </h1>
+        <p class="ml-4">
+          Andrew Boisvert
+        </p>
+        <h1 class="font-semibold text-xl">
+          Description:
+        </h1>
+        <p class="ml-4">
+          This site was developed for an assignment as part of COMP 3612 at Mount Royal University. The main purpose of
+          the assignment is to demonstrate our ability to work with JavaScript before utilizing frameworks in the
+          future. We were assigned the task of developing a single-page application for a clothing website with limited
+          functionality. Key features and functionality have been outlined in the requirements, but the design of the
+          specified pages has largely been left up to our discretion.
+        </p>
+        <h1 class="font-semibold text-xl">
+          Technologies Used:
+        </h1>
+        <p class="ml-4">
+          HTML, Tailwind CSS, JavaScript
+        </p>
+        <h1 class="font-semibold text-xl">
+          GitHub URL:
+        </h1>
+        <p class="ml-4">
+          TODO
+        </p>
+        <h1 class="font-semibold text-xl">
+          Content Attributions:
+        </h1>
+        <div id="modal-attributions" class="space-y-4">
+          <p class="ml-4">The "Closet Collection" logo was created by myself using <a class="text-cerulian"
+              href="https://www.canva.com">Canva</a>. All other placeholder photos and videos have been sourced from <a
+              class="text-cerulian" href="https://picsum.photos/">Lorem Picsum</a>, which utilizes images from <a
+              class="text-cerulian" href="https://unsplash.com/">Unsplash</a>, and <a class="text-cerulian"
+              href="https://www.pexels.com/">Pexels</a>. All photos and videos are licensed to be used for free.</p>
+          <div class="block space-y-2">
+            <p class="inline pl-4">Godisable Jacob - </p><a class="text-cerulian"
+              href="https://www.pexels.com/video/woman-wearing-sunglasses-1154850/">Link to Video</a>
+          </div>
+        </div>
+    </dialog>
+
+  </main>
+
+  <!----------------------------------------------------------------------------
+  / SECTION: Page Footer
+  /---------------------------------------------------------------------------->
+  <!-- TODO: update footer info to liking -->
+  <footer class="bg-timberwolf text-raisin-black font-nunito overflow-x-hidden">
+    <!-- Row of Vertical Navs -->
+    <ul class="grid grid-cols-[repeat(3,minmax(auto,20rem))] justify-center text-center 
+    [&>li]:p-8
+    [&_h4]:font-semibold [&_h4]:text-lg [&_h4]:font-cinzel">
+      <!-- Customer Service Vertical Nav -->
+      <li>
+        <nav>
+          <ul class="flex flex-col items-center
+          [&_a:hover]:text-umber
+          [&_li]:p-2">
+            <li>
+              <h4>Customer Service</h4>
+            </li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Shipping Info</a></li>
+          </ul>
+        </nav>
+      </li>
+      <!-- Company Vertical Nav -->
+      <li>
+        <nav>
+          <ul class="flex flex-col items-center
+          [&_a:hover]:text-umber
+          [&_li]:p-2">
+            <li>
+              <h4>Company</h4>
+            </li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+      <!-- Connect Vertical Nav -->
+      <li>
+        <nav>
+          <ul class="flex flex-col items-center
+          [&_a:hover]:text-umber
+          [&_li]:p-2">
+            <li>
+              <h4>Connect</h4>
+            </li>
+            <li><a href="https://linkedin.com/in/andrewboisvert"><i class="fa fa-linkedin"
+                  aria-hidden="true"></i>&nbsp;LinkedIn</a></li>
+            <li><a href="https://github.com/abois526"><i class="fa fa-code-fork" aria-hidden="true"></i>&nbsp;Github</a>
+            </li>
+            <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;Email</a></li>
+            <li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbsp;Twitter</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+    <!-- Copywrite Section -->
+    <section class="flex flex-col justify-center items-center pb-4">
+      <hr class="w-[80%] border-gray-500">
+      <h4 id="copywrite-text" class="pt-4 text-center">&copy; <date></date> Andrew Boisvert. All rights reserved.</h4>
+      <h4 id="copywrite-text-2" class="w-[70%] text-center">Sample data provided by Randy Connolly for COMP 3612, Mount
+        Royal University.</h4>
+    </section>
+  </footer>
+
+
+  <!----------------------------------------------------------------------------
+  / TEMPLATES: Components for JS content generation
+  /---------------------------------------------------------------------------->
+  <!-- Category Card Template -->
+  <template id="category-card-tmp">
+    <!-- fill gender and type in the dataset -->
+    <div id="img-container" data-route="browse" data-category-gender="" data-category-type=""
+      class="min-w-0 w-60 h-60 rounded border relative group cursor-pointer mx-8">
+      <img id="category-card-img" src="" alt="" class="w-full h-full object-cover rounded">
+      <div
+        class="flex justify-center items-center absolute inset-0 text-white text-xl opacity-0 group-hover:bg-black/40 group-hover:opacity-100 transition-opacity">
+        Explore Products</div>
+    </div>
+    <span id="category-card-span" class="flex justify-center my-2 text-xl"></span>
+  </template>
+
+  <!-- Product Card Template -->
+  <template id="product-card-tmp">
+    <article class="max-w-100 rounded border p-4 flex flex-col gap-3 h-full">
+      <div id="img-container" data-route="product" data-product-id="" class="relative group cursor-pointer">
+        <img id="product-card-img" src="" alt="" class="w-lg aspect-4/3 object-cover rounded">
+        <div
+          class="flex justify-center items-center absolute inset-0 text-white text-xl opacity-0 group-hover:bg-black/40 group-hover:opacity-100 transition-opacity">
+          View Product</div>
+      </div>
+      <h3 id="product-card-title" class="text-lg font-semibold line-clamp-1 wrap-break-word">
+        <!-- product title -->
+      </h3>
+      <p id="product-card-description" class="text-sm text-gray-600 wrap-break-word line-clamp-2">
+        <!-- product description -->
+      </p>
+      <span>
+        <div id="product-card-color" class="w-6 h-6 rounded-4xl border border-black"></div>
+      </span>
+      <span>
+        <fieldset id="product-card-sizes"
+          class="flex justify-start gap-2 flex-wrap
+        [&_label]:flex [&_label]:justify-center [&_label]:items-center [&_label]:border [&_label]:border-umber [&_label]:border-solid [&_label]:w-9 [&_label]:h-9 [&_label]:rounded-sm [&_label:has(input[type=radio]:checked)]:border-2 [&_label:has(input[type=radio]:checked)]:border-cerulian [&_label:has(input[type=radio]:checked)]:border-solid [&_input[type=radio]]:hidden [&_label]:cursor-pointer">
+          <!-- fill with labels -->
+        </fieldset>
+      </span>
+      <div class="flex items-center justify-between mx-2">
+        <span id="product-card-price" class="font-medium text-lg">
+          <!-- product price -->
+        </span>
+        <button data-product-id="" class="px-3 py-1 rounded border text-xl cursor-pointer"><i class="fa fa-cart-plus"
+            aria-hidden="true"></i></button>
+      </div>
+    </article>
+  </template>
+
+  <!-- Size Labels -->
+  <template id="product-card-size-label">
+    <label><span class="text-sm text-center"></span><input type="radio" name="size" value=""></label>
+  </template>
+
+  <!-- Product Page > Filter Labels -->
+  <template id="filter-color-label-tmp">
+    <label class="flex items-center gap-4 text-lg"><input type="checkbox" name="color" value="" class="accent-cerulian">
+      <div class="w-6 h-6 rounded-4xl border border-black"></div><span></span>
+    </label>
+  </template>
+
+</body>
+
+</html>
