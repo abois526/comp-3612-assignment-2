@@ -6,6 +6,7 @@
 /    This module implements the shopping cart functionality for the site.
 /-----------------------------------------------------------------------------*/
 
+
 /*------------------------------------------------------------------------------
 / SECTION: Module Imports
 /-----------------------------------------------------------------------------*/
@@ -15,13 +16,20 @@ import * as anim from "./animations.js";
 import * as render from "./rendering.js";
 
 
-
 /*------------------------------------------------------------------------------
 / SECTION: Functions
 /-----------------------------------------------------------------------------*/
-
+/**
+ * @description sets up the functionality of the cart for the program
+ * @param {Array} productsArr the array of product data
+ * @param {Map} imageMap map of images with id as the key and url as value
+ * @param {Array} cartArr the array of items currently in the cart
+ */
 export function enableCartFunctionality(productsArr, imageMap, cartArr) {
 
+  /**
+   * @description creates a cart item which will be used to populate the array
+   */
   function CartItem(id, name, gender, price, colorName, size, quantity, sales) {
     this.id = id;
     this.name = name;

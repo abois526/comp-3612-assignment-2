@@ -5,9 +5,17 @@
 /  Description:
 /    This website is a Single Page Application (SPA) and all of the various views
 /    will be filled using DOM manipulation and set visible/hidden through the
-/    script. The data for the SPA is fetched from an API URL and stored within 
+/    script. The data for the SPA is fetched from an API and stored within 
 /    localstorage after being parsed and turned into a string version of the 
 /    array. 
+/    
+/  Modules Overview:
+/    animations.js - handles animations for actions
+/    dom.js - DOM manipulation helper functions
+/    rendering.js - rendering of content for different page views
+/    router.js - logic for routing all site navigation
+/    shoppingCart.js - handles shopping cart functionality
+/    storageAndApi.js - handles all API and localstorage functionality
 /-----------------------------------------------------------------------------*/
 
 
@@ -88,6 +96,7 @@ function fillCopywriteDate() {
 /**
  * @description Preps the images array for use by modifying sizes and object attributes
  * @param {Array} imagesArr array of all images
+ * @param {Array} productsArr array of product data
  */
 function prepImagesArray(imagesArr, productsArr) {
   for(let i = 0; i < 100; i++){

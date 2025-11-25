@@ -6,6 +6,7 @@
 /    This module provides functions to render content for the SPA. 
 /-----------------------------------------------------------------------------*/
 
+
 /*------------------------------------------------------------------------------
 / SECTION: Module Imports
 /-----------------------------------------------------------------------------*/
@@ -18,6 +19,7 @@ import { $qs, $qsa, $ce, $ac } from "./dom.js";
 /**
  * @description renders the home view and contains helper functions to assist
  * @param {Array} productsArr the array populated from JSON data containing product info
+ * @param {Map} imageMap map of images with id as the key and url as value
 */
 export function renderHomeView(productsArr, imageMap) {
   // adjust page title
@@ -42,6 +44,7 @@ export function renderHomeView(productsArr, imageMap) {
 /**
  * @description renders the Men's landing page view and contains helper functions to assist
  * @param {Array} productsArr the array populated from JSON data containing product info
+ * @param {Map} imageMap map of images with id as the key and url as value
 */
 export function renderMensLandingView(productsArr, imageMap) {
   // adjust page title
@@ -68,6 +71,7 @@ export function renderMensLandingView(productsArr, imageMap) {
 /**
  * @description renders the Women's landing page view and contains helper functions to assist
  * @param {Array} productsArr the array populated from JSON data containing product info
+ * @param {Map} imageMap map of images with id as the key and url as value
 */
 export function renderWomensLandingView(productsArr, imageMap) {
   // adjust page title
@@ -94,6 +98,7 @@ export function renderWomensLandingView(productsArr, imageMap) {
 /**
  * @description renders the browse view and contains helper functions to assist
  * @param {Array} productsArr the array populated from JSON data containing product info
+ * @param {Map} imageMap map of images with id as the key and url as value
  */
 export function renderBrowseView(productsArr, imageMap) {
   // adjust page title
@@ -251,6 +256,12 @@ export function renderBrowseView(productsArr, imageMap) {
 
 }
 
+/**
+ * @description sets up and enables product filtering in the browse view
+ * @param {Array} productsArr 
+ * @param {Map} imageMap map of images with id as the key and url as value
+ * @param {Array} cartArr 
+ */
 export function enableBrowseFilters(productsArr, imageMap, cartArr) {
   const form = document.querySelector("#filters");
 
@@ -279,6 +290,8 @@ export function enableBrowseFilters(productsArr, imageMap, cartArr) {
 
 /**
  * @description renders the single product view and contains helper functions to assist
+ * @param {Object} product the particular product thats being rendered
+ * @param {Map} imageMap map of images with id as the key and url as value
  * @param {Array} productsArr the array populated from JSON data containing product info
 */
 export function renderSingleProductView(product, imageMap, productsArr) {
@@ -338,6 +351,8 @@ export function renderSingleProductView(product, imageMap, productsArr) {
 /**
  * @description renders the cart view and contains helper functions to assist
  * @param {Array} productsArr the array populated from JSON data containing product info
+ * @param {Map} imageMap map of images with id as the key and url as value
+ * @param {Array} cartArr the array of items currently in the shopping cart
  */
 export function renderCartView(productsArr, imageMap, cartArr) {
   // adjust page title
@@ -384,7 +399,7 @@ export function renderCartView(productsArr, imageMap, cartArr) {
       itemImg.setAttribute("src", imageMap.get(item.id));
       itemSubtotal.textContent = `$${(item.quantity * item.price).toFixed(2)}`;
       itemInfo.textContent = `#${item.id} / ${item.colorName} / ${item.size}`;
-      itemPrice.textContent = `$${item.price}`;
+      itemPrice.textContent = `$${item.price.toFixed(2)}`;
       itemQuantity.textContent = `QTY: ${item.quantity}`;
       $ac(clone, itemsList);
 
@@ -453,7 +468,7 @@ export function renderCartView(productsArr, imageMap, cartArr) {
 
 /**
  * @description renders the about us view and contains helper functions to assist
- * @param {Array} productsArr the array populated from JSON data containing product info
+ * @param {Array} imagesArr the array of all the images being used
  */
 export function renderAboutUsView(imagesArr) {
   const dialog = $qs("#about-view");
@@ -540,10 +555,14 @@ function renderSingleProductCard(item, image, parent) {
   $ac(clone, parent);
 }
 
+
 /**
  * @description renders a single category card with info about the category
- * @param {String} category The category for the card
- * @param {Node} parent The node the card will be appended to
+ * @param {String} category the product category for the card being rendered
+ * @param {Array} productsArr the array of product data
+ * @param {Map} imageMap map of images with id as the key and url as value
+ * @param {Node} parent the parent node of the card   
+ * @param {String} gender the gender for the page view (mens vs womens)
  */
 function renderCategoryCard(category, productsArr, imageMap, parent, gender) {
   const categoryCardTmp = $qs("#category-card-tmp");
